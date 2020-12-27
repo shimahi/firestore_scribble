@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { FormControl, TextField } from '@material-ui/core'
+import { FormControl, TextField, List } from '@material-ui/core'
 import { db } from '_firebase'
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos'
+import { TaskItem } from 'components/atoms'
 
 export const IndexTemplate = () => {
   const [tasks, setTasks] = useState([
@@ -54,13 +55,11 @@ export const IndexTemplate = () => {
       </button>
       <hr />
 
-      {tasks.map(({ id, title }) => {
-        return (
-          <div key={id}>
-            <h2>{title}</h2>
-          </div>
-        )
-      })}
+      <List>
+        {tasks.map(({ id, title }) => (
+          <TaskItem key={id} id={id} title={title} />
+        ))}
+      </List>
     </section>
   )
 }
