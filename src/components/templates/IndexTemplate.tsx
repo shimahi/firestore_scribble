@@ -3,6 +3,7 @@ import { FormControl, TextField, List } from '@material-ui/core'
 import { db } from '_firebase'
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos'
 import { TaskItem } from 'components/atoms'
+import 'twin.macro'
 
 export const IndexTemplate = () => {
   const [tasks, setTasks] = useState([
@@ -35,24 +36,27 @@ export const IndexTemplate = () => {
   }
 
   return (
-    <section>
-      <h1>TODO APP</h1>
+    <section tw="pt-12">
+      <h1 tw="text-center">TODO APP</h1>
 
-      <FormControl>
-        <TextField
-          label="New task ?"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          value={input}
-          onChange={({ target: { value } }) => {
-            setInput(value)
-          }}
-        />
-      </FormControl>
-      <button disabled={!input} onClick={newTask}>
-        <AddToPhotosIcon />
-      </button>
+      <div tw="flex justify-center my-12">
+        <FormControl>
+          <TextField
+            label="New task ?"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={input}
+            onChange={({ target: { value } }) => {
+              setInput(value)
+            }}
+          />
+        </FormControl>
+        <button disabled={!input} onClick={newTask}>
+          <AddToPhotosIcon />
+        </button>
+      </div>
+
       <hr />
 
       <List>
