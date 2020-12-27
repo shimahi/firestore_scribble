@@ -1,4 +1,8 @@
-module.exports = {
-  presets: ['@babel/preset-env', '@babel/preset-react', '@emotion/babel-preset-css-prop'],
-  plugins: ['macros', '@babel/plugin-transform-runtime'],
+module.exports = function (api) {
+  api.cache(true)
+
+  const plugins = ['macros']
+  const presets = ['next/babel', '@emotion/babel-preset-css-prop']
+
+  return { plugins, presets }
 }
