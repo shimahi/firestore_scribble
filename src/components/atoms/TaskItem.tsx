@@ -1,5 +1,5 @@
 import { useState } from 'react'
-// import firebase from 'firebase/app'
+import { db } from 'firebaseConfig'
 import { ListItem, TextField, Grid } from '@material-ui/core'
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
@@ -13,7 +13,18 @@ type Props = {
 export const TaskItem = ({ title, id }: Props) => {
   const [_title, setTitle] = useState(title)
 
-  console.log(id)
+  const editTask = () => {
+    db.collection('tasks').doc(id).set(
+      { title: _title },
+      {
+        merge: true,
+      },
+    )
+  }
+
+  const deleteTask = () => {
+    db.collection('tasks').doc(id).delete()
+  }
 
   return (
     <div tw="container mx-auto max-w-screen-md!">
@@ -25,16 +36,16 @@ export const TaskItem = ({ title, id }: Props) => {
               shrink: true,
             }}
             label="Edit task"
-            value={title}
+            value={_title}
             onChange={({ target: { value } }) => {
               setTitle(value)
             }}
           />
         </Grid>
-        <button onClick={() => {}}>
+        <button onClick={editTask}>
           <EditOutlinedIcon />
         </button>
-        <button onClick={() => {}}>
+        <button onClick={deleteTask}>
           <DeleteOutlineOutlinedIcon />
         </button>
       </ListItem>

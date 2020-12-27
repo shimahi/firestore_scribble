@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FormControl, TextField, List } from '@material-ui/core'
-import { db } from '_firebase'
+import { db } from 'firebaseConfig'
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos'
 import { TaskItem } from 'components/atoms'
 import 'twin.macro'
