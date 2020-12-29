@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { FormControl, TextField, List } from '@material-ui/core'
 import { db, auth } from 'firebaseConfig'
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos'
-// import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { TaskItem } from 'components/atoms'
 import 'twin.macro'
 
@@ -49,7 +49,18 @@ export const IndexTemplate = () => {
   return (
     <section tw="pt-12">
       <h1 tw="text-center">TODO APP</h1>
-
+      <button
+        onClick={async () => {
+          try {
+            await auth.signOut()
+            router.push('/login')
+          } catch (error) {
+            alert(error.message)
+          }
+        }}
+      >
+        <ExitToAppIcon />
+      </button>
       <div tw="flex justify-center my-12">
         <FormControl>
           <TextField

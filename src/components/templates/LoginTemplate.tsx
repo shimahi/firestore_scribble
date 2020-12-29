@@ -23,6 +23,7 @@ export const LoginTemplate = () => {
   return (
     <article tw="pt-12">
       <h1 tw="text-center">{isLogin ? 'Login' : 'Register'} </h1>
+
       <div tw="container mx-auto px-4 max-w-screen-md! grid grid-cols-1 gap-5 my-12">
         <FormControl>
           <TextField
