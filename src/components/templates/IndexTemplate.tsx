@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { FormControl, TextField, List } from '@material-ui/core'
-import { db } from 'firebaseConfig'
+import { db, auth } from 'firebaseConfig'
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos'
+// import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { TaskItem } from 'components/atoms'
 import 'twin.macro'
 
 export const IndexTemplate = () => {
+  const router = useRouter()
   const [tasks, setTasks] = useState([
     {
       id: '',
@@ -27,6 +30,14 @@ export const IndexTemplate = () => {
 
     return () => unSub()
   }, [])
+
+  useEffect(() => {
+    const unSub = auth.onAuthStateChanged((user) => {
+      if (!user) router.push('/login')
+    })
+
+    return () => unSub()
+  })
 
   const newTask = (/* e: React.MouseEvent<HTMLButtonElement> */) => {
     db.collection('tasks').add({

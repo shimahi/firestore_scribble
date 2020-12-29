@@ -11,11 +11,13 @@ export const LoginTemplate = () => {
   const [password, setPassword] = useState('')
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const unSub = auth.onAuthStateChanged((user) => {
       if (user) {
         router.push('/')
       }
     })
+
+    return () => unSub()
   })
 
   return (
